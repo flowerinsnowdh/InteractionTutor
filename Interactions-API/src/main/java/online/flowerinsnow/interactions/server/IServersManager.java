@@ -17,9 +17,10 @@ public interface IServersManager {
 
     /**
      * 将玩家传送到另一个服务器
+     * 因为涉及Redis，调用此方法请异步
      *
      * @param player 玩家UUID
      * @param server 服务器
      */
-    void sendPlayerToServer(@NotNull UUID player, IServerInfo server);
+    void sendPlayerToServer(@NotNull UUID player, String server);
 }

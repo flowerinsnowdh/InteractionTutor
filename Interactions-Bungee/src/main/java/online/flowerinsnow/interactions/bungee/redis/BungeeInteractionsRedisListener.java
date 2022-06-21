@@ -1,5 +1,8 @@
 package online.flowerinsnow.interactions.bungee.redis;
 
+import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.config.ServerInfo;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import online.flowerinsnow.interactions.bungee.Main;
 import online.flowerinsnow.interactions.bungee.server.BungeeServerInfo;
 import online.flowerinsnow.interactions.redis.IRedisListener;
@@ -48,6 +51,14 @@ public class BungeeInteractionsRedisListener implements IRedisListener {
                             serverInfo.serverPlayerList.remove(UUID.fromString(messages[1]));
                         }
                     });
+                }
+                case "server_teleport" -> {
+                    UUID uuid = UUID.fromString(messages[1]);
+                    ProxiedPlayer player = ProxyServer.getInstance().getPlayer(uuid);
+                    if (player == null) return;
+                    ServerInfo info = ProxyServer.getInstance().getServerInfo(messages[2]);
+                    if (info == null) return;
+                    player.connect(info);
                 }
             }
         }

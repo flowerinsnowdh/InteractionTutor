@@ -1,12 +1,15 @@
 package online.flowerinsnow.interactions.bukkit;
 
 import online.flowerinsnow.interactions.InteractionsAPI;
+import online.flowerinsnow.interactions.bukkit.command.ServerTeleportCommand;
 import online.flowerinsnow.interactions.bukkit.database.BukkitSQLManager;
 import online.flowerinsnow.interactions.bukkit.listener.JoinLeftListener;
 import online.flowerinsnow.interactions.bukkit.redis.BukkitInteractionsRedisListener;
 import online.flowerinsnow.interactions.bukkit.redis.BukkitRedisManager;
 import online.flowerinsnow.interactions.bukkit.server.BukkitServersManager;
 import online.flowerinsnow.interactions.redis.IRedisManager;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -38,6 +41,8 @@ public class Main extends JavaPlugin {
         InteractionsAPI.setInstance(core);
 
         getServer().getPluginManager().registerEvents(new JoinLeftListener(), this);
+
+        registerCommand("serverteleport", new ServerTeleportCommand());
     }
 
     @Override
@@ -59,5 +64,13 @@ public class Main extends JavaPlugin {
 
     public static BukkitInteractionsCore getCore() {
         return core;
+    }
+
+    private void registerCommand(String name, TabExecutor executor) {
+        PluginCommand command = getCommand(name);
+        if (command != null) {
+            command.setExecutor(executor);
+            command.setTabCompleter(executor);
+        }
     }
 }

@@ -2,3 +2,12 @@ main: online.flowerinsnow.interactions.bukkit.Main
 name: Interactions
 version: ${project.version}
 author: flowerinsnow
+
+commands:
+  serverteleport:
+    aliases:
+      - stp
+
+permissions:
+  interactions.serverteleport:
+    default: op

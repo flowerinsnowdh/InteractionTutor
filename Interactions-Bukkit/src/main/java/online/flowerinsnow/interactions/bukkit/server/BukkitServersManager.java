@@ -1,5 +1,6 @@
 package online.flowerinsnow.interactions.bukkit.server;
 
+import online.flowerinsnow.interactions.bukkit.Main;
 import online.flowerinsnow.interactions.redis.IRedisManager;
 import online.flowerinsnow.interactions.server.IServerInfo;
 import online.flowerinsnow.interactions.server.IServersManager;
@@ -50,7 +51,7 @@ public class BukkitServersManager implements IServersManager {
     }
 
     @Override
-    public void sendPlayerToServer(@NotNull UUID player, IServerInfo server) {
-
+    public void sendPlayerToServer(@NotNull UUID player, String server) {
+        Main.getCore().getRedisManager().publish("Interactions", "server_teleport", player.toString(), server);
     }
 }
