@@ -1,6 +1,7 @@
 package online.flowerinsnow.interactions.bungee.redis;
 
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import online.flowerinsnow.interactions.bungee.Main;
@@ -9,6 +10,8 @@ import online.flowerinsnow.interactions.redis.IRedisListener;
 import online.flowerinsnow.interactions.server.IServerInfo;
 import org.jetbrains.annotations.NotNull;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -59,6 +62,11 @@ public class BungeeInteractionsRedisListener implements IRedisListener {
                     ServerInfo info = ProxyServer.getInstance().getServerInfo(messages[2]);
                     if (info == null) return;
                     player.connect(info);
+                }
+                case "player_shout" -> {
+                    String player = messages[1];
+                    String context = new String(Base64.getDecoder().decode(messages[2]), StandardCharsets.UTF_8);
+                    ProxyServer.getInstance().broadcast(new TextComponent("<" + player + "> 喊话：" + context));
                 }
             }
         }

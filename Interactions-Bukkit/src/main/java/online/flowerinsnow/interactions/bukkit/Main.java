@@ -2,6 +2,7 @@ package online.flowerinsnow.interactions.bukkit;
 
 import online.flowerinsnow.interactions.InteractionsAPI;
 import online.flowerinsnow.interactions.bukkit.command.ServerTeleportCommand;
+import online.flowerinsnow.interactions.bukkit.command.ShoutCommand;
 import online.flowerinsnow.interactions.bukkit.database.BukkitSQLManager;
 import online.flowerinsnow.interactions.bukkit.listener.JoinLeftListener;
 import online.flowerinsnow.interactions.bukkit.redis.BukkitInteractionsRedisListener;
@@ -43,6 +44,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new JoinLeftListener(), this);
 
         registerCommand("serverteleport", new ServerTeleportCommand());
+        registerCommand("shout", new ShoutCommand());
     }
 
     @Override
