@@ -1,0 +1,3 @@
+name: Interactions
+version: '${project.version}'
+main: online.flowerinsnow.interactionsbungee.InteractionsBungee

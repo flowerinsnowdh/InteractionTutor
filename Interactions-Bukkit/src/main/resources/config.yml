@@ -1,0 +1,12 @@
+server_name: 'lobby1'
+sql:
+  url: 'jdbc:mysql://127.0.0.1:3306?characterEncoding=utf-8'
+  username: 'minecraft'
+  password: '123456'
+  initSize: 4
+  maxActive: 16
+  maxWait: 60000
+redis:
+  host: '127.0.0.1'
+  port: 6379
+  password: '123456'
